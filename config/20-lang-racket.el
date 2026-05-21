@@ -75,16 +75,14 @@
   (setq racket-program "racket"))
 
 ;; ── rainbow-delimiters 彩色括号 ──
+;; 注：插件硬编码只创建 9 层 face（第 10+ 层自动循环复用 1-9）
 (use-package rainbow-delimiters
   :ensure t
   :defer t
-  :init
-  ;; 扩展到 12 层彩色括号（默认只定义 9 层）
-  (setq rainbow-delimiters-max-face-count 12)
   :config
-  ;; 12 色高对比度调色板（HSV 黄金角跳变）
+  ;; 9 色高对比度调色板（取前 9 色，第 10+ 层自动循环）
   (defvar my/rainbow-colors
-    '(;; 深度 1-12
+    '(;; 深度 1-9
       "#ff8c64"  ;; 1. 珊瑚红
       "#64dc8c"  ;; 2. 薄荷绿
       "#64a0ff"  ;; 3. 天蓝
@@ -93,13 +91,10 @@
       "#64ffe6"  ;; 6. 青松石
       "#c864ff"  ;; 7. 紫罗兰
       "#ffb450"  ;; 8. 橙色
-      "#50c864"  ;; 9. 翠绿
-      "#64b4ff"  ;; 10. 湖蓝
-      "#ff64a0"  ;; 11. 玫瑰粉
-      "#dcff64") ;; 12. 柠檬绿
-    "彩虹括号配色方案")
+      "#50c864") ;; 9. 翠绿
+    "彩虹括号配色方案（9 色，更深自动循环）")
 
-  (dotimes (i (length my/rainbow-colors))
+  (dotimes (i 9)
     (set-face-foreground
      (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
      (nth i my/rainbow-colors))))
