@@ -1,0 +1,12 @@
+# 运行时自动生成的文件
+auto-save-list/
+eln-cache/
+elpa/
+places
+recentf
+custom.el
+
+# 操作系统
+*~
+.DS_Store
+Thumbs.db
