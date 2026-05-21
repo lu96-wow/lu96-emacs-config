@@ -34,6 +34,9 @@
     ;; racket-mode 自带的基于宏展开的语义补全
     (require 'racket-xp)
     (racket-xp-mode 1)
+    ;; ── company 补全弹出框 ──
+    ;; 调用 racket-xp 的 completion-at-point 后端显示候选列表
+    (company-mode 1)
     ;; ── eldoc 参数/文档提示 ──
     (eldoc-mode 1)
     ;; ── 可选辅助（装了才启用） ──
@@ -46,13 +49,23 @@
     ;; quack：Racket 专属缩进与文档集成
     (when (fboundp 'quack-mode)
       (quack-mode 1))
-    ;; scheme-complete：上下文补全（与 eldoc 联动）
-    (when (fboundp 'scheme-define-intelligent-completion)
-      (scheme-define-intelligent-completion))
     ;; Racket 缩进：2 空格
     (setq-local indent-tabs-mode nil
                 tab-width 2))
   (setq racket-program "racket"))
+
+;; ── company 补全框架配置 ──
+(use-package company
+  :ensure t
+  :defer t
+  :config
+  ;; Racket 补全靠 company-capf（调用 racket-xp 的补全函数）
+  (setq company-backends '(company-capf
+                           company-dabbrev-code
+                           company-dabbrev)
+        company-idle-delay 0.2
+        company-minimum-prefix-length 1
+        company-selection-wrap-around t))
 
 ;; ── Geiser（可选，与 racket-mode 互补） ──
 (use-package geiser-racket
