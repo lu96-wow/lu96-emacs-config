@@ -27,7 +27,7 @@
     "Insert a matching closing delimiter (安全补丁：处理空缓冲区)。"
     (interactive "P")
     (if (or prefix
-            (< (point) 2)
+            (<= (point) 2)   ;; 缓冲区少于 2 个字符时直接插入
             (and (string= "#\\" (buffer-substring-no-properties
                                  (- (point) 2) (point)))
                  (racket--ppss-string-p (syntax-ppss))))
@@ -58,8 +58,6 @@
     (company-mode 1)
     ;; ── eldoc 参数/文档提示 ──
     (eldoc-mode 1)
-    ;; ── 括号匹配补全（内置，无需装包） ──
-    (electric-pair-mode 1)
     ;; ── 彩色括号（按嵌套深度着色） ──
     (rainbow-delimiters-mode 1)
     ;; ── 可选辅助（装了才启用） ──
