@@ -4,7 +4,9 @@
 
 ;; ── 全局快捷键 ──
 
-;; 将 M-x 替换为更现代的 M-x（已经默认）
+;; Ctrl+Shift+C = 复制（方便在终端中复制错误信息）
+(global-set-key (kbd "C-S-c") 'kill-ring-save)
+
 ;; 常用命令的快捷方式
 (global-set-key (kbd "C-c r") 'recentf-open-files)    ;; 打开最近文件
 (global-set-key (kbd "C-c f") 'find-file)              ;; 查找文件
