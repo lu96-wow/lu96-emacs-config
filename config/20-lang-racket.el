@@ -18,6 +18,25 @@
 ;;   apt install emacs-goodies-el             — Debian 版 quack
 ;; ============================================================
 
+;; ── racket-insert-closing 安全补丁 ──
+;; racket-mode 在空文件开头按闭括号时，
+;; 尝试读取 (point)-2 位置导致 args-out-of-range，
+;; 这里提前拦截。
+(with-eval-after-load 'racket-parens
+  (defun racket-insert-closing (&optional prefix)
+    "Insert a matching closing delimiter (安全补丁：处理空缓冲区)。"
+    (interactive "P")
+    (if (or prefix
+            (< (point) 2)
+            (and (string= "#\\" (buffer-substring-no-properties
+                                 (- (point) 2) (point)))
+                 (racket--ppss-string-p (syntax-ppss))))
+        (racket--self-insert last-command-event)
+      (let* ((open-char  (racket--open-paren #'backward-up-list))
+             (close-pair (and open-char (assq open-char racket--matching-parens)))
+             (close-char (and close-pair (cdr close-pair))))
+        (racket--self-insert (or close-char last-command-event))))))
+
 (use-package racket-mode
   :ensure t
   :defer t
