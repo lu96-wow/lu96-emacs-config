@@ -11,7 +11,7 @@
 (use-package rainbow-delimiters
   :ensure t
   :defer t
-  :hook (prog-mode . rainbow-delimiters-mode)
+  :hook ((prog-mode text-mode) . rainbow-delimiters-mode)
   :config
   ;; 9 色暗色系调色板（低亮度，护眼）
   ;; 注：插件硬编码只创建 9 层 face，第 10+ 层自动循环复用 1-9
