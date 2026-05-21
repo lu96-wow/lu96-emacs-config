@@ -58,8 +58,6 @@
     (company-mode 1)
     ;; ── eldoc 参数/文档提示 ──
     (eldoc-mode 1)
-    ;; ── 彩色括号（按嵌套深度着色） ──
-    (rainbow-delimiters-mode 1)
     ;; ── 可选辅助（装了才启用） ──
     ;; paredit / smartparens：结构化括号编辑
     (when (fboundp 'paredit-mode)
@@ -71,31 +69,6 @@
     (setq-local indent-tabs-mode nil
                 tab-width 2))
   (setq racket-program "racket"))
-
-;; ── rainbow-delimiters 彩色括号 ──
-;; 注：插件硬编码只创建 9 层 face（第 10+ 层自动循环复用 1-9）
-(use-package rainbow-delimiters
-  :ensure t
-  :defer t
-  :config
-  ;; 9 色暗色系调色板（低亮度，护眼）
-  (defvar my/rainbow-colors
-    '(;; 深度 1-9
-      "#d08770"  ;; 1. 暖褐（替代刺眼红色）
-      "#7cb884"  ;; 2. 草绿
-      "#7898c8"  ;; 3. 雾蓝
-      "#c884c0"  ;; 4. 淡紫
-      "#c8b870"  ;; 5. 土黄
-      "#70b8a8"  ;; 6. 苍青
-      "#a888c8"  ;; 7. 灰紫
-      "#c8a070"  ;; 8. 驼色
-      "#70a870") ;; 9. 灰绿
-    "彩虹括号配色方案（暗色系，9 色，更深自动循环）")
-
-  (dotimes (i 9)
-    (set-face-foreground
-     (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
-     (nth i my/rainbow-colors))))
 
 ;; ── company 补全框架配置 ──
 (use-package company
