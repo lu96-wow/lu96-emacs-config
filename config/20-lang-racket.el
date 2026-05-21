@@ -1,21 +1,27 @@
 ;; ============================================================
 ;; 20-lang-racket.el — Racket 开发环境
 ;;
-;; 文件名匹配规则：
-;;   .rkt*     — 匹配 .rkt、.rkt.history 等变体
-;;   .rktl     — Racket 库文件
-;;   .rktd     — Racket 数据文件
-;;   .rktx     — Racket 示例文件
+;; 参考官方指南：https://docs.racket-lang.org/guide/Emacs.html
+;;
+;; 文件名匹配：
+;;   .rkt*     — 匹配 .rkt、.rkt.history 等衍生文件
+;;   .rktl     — 库文件
+;;   .rktd     — 数据文件
+;;   .rktx     — 示例文件
 ;;   .scrbl    — Scribble 文档
 ;;
-;; 前提：需先安装 racket-mode
-;;   M-x package-install RET racket-mode RET
+;; 依赖：M-x package-install RET racket-mode RET
+;; 可选增强：
+;;   M-x package-install RET quack RET        — 缩进/文档增强
+;;   M-x package-install RET geiser RET       — 集成式 REPL
+;;   M-x package-install RET scheme-complete  — eldoc 补全
+;;   apt install emacs-goodies-el             — Debian 版 quack
 ;; ============================================================
 
 (use-package racket-mode
   :ensure t
   :defer t
-  :mode ("\\.rkt\\(\\..*\\)?\\'"  ;; .rkt 及 .rkt.xxx 衍生文件
+  :mode ("\\.rkt\\(\\..*\\)?\\'"  ;; .rkt 及 .rkt.xxx
          "\\.rktl\\'"
          "\\.rktd\\'"
          "\\.rktx\\'"
@@ -23,28 +29,38 @@
   :hook (racket-mode . my/racket-setup)
   :config
   (defun my/racket-setup ()
-    "Racket 模式挂钩：开启辅助功能。"
-    ;; ── Racket 官方语法补全 ──
-    ;; racket-xp 基于 Racket 宏展开和静态分析，
-    ;; 提供语义补全、绑定高亮、定义跳转
+    "Racket 模式挂钩。"
+    ;; ── 官方推荐：racket-xp 语法补全 ──
+    ;; racket-mode 自带的基于宏展开的语义补全
     (require 'racket-xp)
     (racket-xp-mode 1)
-    ;; 参数提示
+    ;; ── eldoc 参数/文档提示 ──
     (eldoc-mode 1)
-    ;; 括号编辑（需安装 paredit）
+    ;; ── 可选辅助（装了才启用） ──
+    ;; paredit / smartparens：结构化括号编辑
     (when (fboundp 'paredit-mode)
       (paredit-mode 1))
-    ;; 彩虹括号（需安装 rainbow-delimiters）
+    ;; rainbow-delimiters：彩虹括号（按嵌套深度着色）
     (when (fboundp 'rainbow-delimiters-mode)
       (rainbow-delimiters-mode 1))
-    ;; 通用补全（需安装 company，与 racket-xp 互补）
-    (when (fboundp 'company-mode)
-      (company-mode 1))
-    ;; Racket 缩进用 2 空格（社区惯例）
+    ;; quack：Racket 专属缩进与文档集成
+    (when (fboundp 'quack-mode)
+      (quack-mode 1))
+    ;; scheme-complete：上下文补全（与 eldoc 联动）
+    (when (fboundp 'scheme-define-intelligent-completion)
+      (scheme-define-intelligent-completion))
+    ;; Racket 缩进：2 空格
     (setq-local indent-tabs-mode nil
                 tab-width 2))
-  ;; Racket 交互环境路径
   (setq racket-program "racket"))
+
+;; ── Geiser（可选，与 racket-mode 互补） ──
+(use-package geiser-racket
+  :ensure geiser
+  :defer t
+  :after racket-mode
+  :config
+  (setq geiser-racket-binary "racket"))
 
 (provide '20-lang-racket)
 ;;; 20-lang-racket.el ends here
