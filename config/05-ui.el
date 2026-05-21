@@ -7,8 +7,13 @@
 ;; 不要行号在终端下显示为红色（避免混乱）
 (setq display-line-numbers-width-start t)
 
-;; 高亮当前行
+;; ── 颜色主题（暗色） ──
+;; modus-vivendi 是 Emacs 官方暗色主题，高对比度、护眼
+(load-theme 'modus-vivendi t)
+
+;; 高亮当前行（淡灰色）
 (global-hl-line-mode 1)
+(set-face-background 'hl-line "#333333")
 
 ;; 显示列号
 (column-number-mode 1)
