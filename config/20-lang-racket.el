@@ -77,7 +77,29 @@
 ;; ── rainbow-delimiters 彩色括号 ──
 (use-package rainbow-delimiters
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  ;; 12 色高对比度调色板（HSV 黄金角跳变）
+  (defvar my/rainbow-colors
+    '(;; 深度 1-12
+      "#ff8c64"  ;; 1. 珊瑚红
+      "#64dc8c"  ;; 2. 薄荷绿
+      "#64a0ff"  ;; 3. 天蓝
+      "#ff64dc"  ;; 4. 品红
+      "#ffd264"  ;; 5. 琥珀黄
+      "#64ffe6"  ;; 6. 青松石
+      "#c864ff"  ;; 7. 紫罗兰
+      "#ffb450"  ;; 8. 橙色
+      "#50c864"  ;; 9. 翠绿
+      "#64b4ff"  ;; 10. 湖蓝
+      "#ff64a0"  ;; 11. 玫瑰粉
+      "#dcff64") ;; 12. 柠檬绿
+    "彩虹括号配色方案")
+
+  (dotimes (i (length my/rainbow-colors))
+    (set-face-foreground
+     (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
+     (nth i my/rainbow-colors))))
 
 ;; ── company 补全框架配置 ──
 (use-package company
