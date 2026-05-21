@@ -78,6 +78,9 @@
 (use-package rainbow-delimiters
   :ensure t
   :defer t
+  :init
+  ;; 扩展到 12 层彩色括号（默认只定义 9 层）
+  (setq rainbow-delimiters-max-face-count 12)
   :config
   ;; 12 色高对比度调色板（HSV 黄金角跳变）
   (defvar my/rainbow-colors
