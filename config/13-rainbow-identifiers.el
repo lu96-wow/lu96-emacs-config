@@ -25,14 +25,31 @@
   ;; 0.3 秒 = 停顿时才刷新颜色
   (setq jit-lock-defer-time 0.3)
   :config
-  ;; 颜色数量（更多色彩，更亮）
-  (setq rainbow-identifiers-face-count 16)
-  ;; CIE Lab 空间生成颜色，色彩均匀分布
+  ;; 插件硬编码只创建 15 个 face（第 16+ 个循环到第 1 个）
+  (setq rainbow-identifiers-face-count 15)
   (setq rainbow-identifiers-choose-face-function
-        'rainbow-identifiers-cie-l*a*b*-choose-face
-        rainbow-identifiers-cie-l*a*b*-lightness 65   ;; 亮度提高
-        rainbow-identifiers-cie-l*a*b*-saturation 55  ;; 饱和度提高
-        rainbow-identifiers-cie-l*a*b*-color-count 16))
+        'rainbow-identifiers-predefined-choose-face)
+  ;; 自定义 15 色 foreground，保证相邻索引颜色差异大
+  (let ((colors
+         '("#e6194b"  ;; 1.  红
+           "#3cb44b"  ;; 2.  绿
+           "#4363d8"  ;; 3.  蓝
+           "#f58231"  ;; 4.  橙
+           "#911eb4"  ;; 5.  紫
+           "#42d4f4"  ;; 6.  青
+           "#f032e6"  ;; 7.  粉
+           "#bfef45"  ;; 8.  黄绿
+           "#469990"  ;; 9.  墨绿
+           "#dcbeff"  ;; 10. 淡紫
+           "#9a6324"  ;; 11. 棕
+           "#800000"  ;; 12. 深红
+           "#aaffc3"  ;; 13. 浅绿
+           "#808000"  ;; 14. 橄榄
+           "#000075"))) ;; 15. 深蓝
+    (dotimes (i (length colors))
+      (set-face-foreground
+       (intern (format "rainbow-identifiers-identifier-%d" (1+ i)))
+       (nth i colors)))))
 
 ;; ── 全局激活 ──
 (defun my/rainbow-identifiers-activate ()
