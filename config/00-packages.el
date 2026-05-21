@@ -17,8 +17,15 @@
 ;; 初始化包系统
 (package-initialize)
 
-;; 首次使用手动刷新：M-x package-refresh-contents
-;; 安装包：M-x package-install RET <包名>
+;; 首次使用自动刷新包列表
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; ── use-package 集成（Emacs 29+ 内置） ──
+(require 'use-package)
+(setq use-package-verbose nil)
+
+;; 换机器后只需 clone 配置，Emacs 首次启动会自动通过 :ensure t 安装指定包
 
 (provide '00-packages)
 ;;; 00-packages.el ends here

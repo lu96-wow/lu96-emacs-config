@@ -13,6 +13,7 @@
 ;; ============================================================
 
 (use-package racket-mode
+  :ensure t
   :defer t
   :mode ("\\.rkt\\(\\..*\\)?\\'"  ;; .rkt 及 .rkt.xxx 衍生文件
          "\\.rktl\\'"
@@ -25,9 +26,9 @@
     "Racket 模式挂钩：开启辅助功能。"
     ;; ── Racket 官方语法补全 ──
     ;; racket-xp 基于 Racket 宏展开和静态分析，
-    ;; 提供比通用补全更精准的语义补全
-    (when (fboundp 'racket-xp-complete-mode)
-      (racket-xp-complete-mode 1))
+    ;; 提供语义补全、绑定高亮、定义跳转
+    (require 'racket-xp)
+    (racket-xp-mode 1)
     ;; 参数提示
     (eldoc-mode 1)
     ;; 括号编辑（需安装 paredit）
