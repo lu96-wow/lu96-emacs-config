@@ -12,6 +12,9 @@
   :ensure t
   :defer t
   :hook ((prog-mode text-mode) . rainbow-delimiters-mode)
+  :init
+  ;; 确保语法高亮在所有模式下开启（彩色括号依赖 font-lock）
+  (global-font-lock-mode 1)
   :config
   ;; 9 色暗色系调色板（低亮度，护眼）
   ;; 注：插件硬编码只创建 9 层 face，第 10+ 层自动循环复用 1-9
