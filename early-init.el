@@ -2,9 +2,14 @@
 ;; early-init.el — Emacs 29+ 早期初始化
 ;; ============================================================
 
+;; ── 包管理：关闭启动时自动激活 ──
+;; 改为由 init.el → 00-packages.el 手动调用 package-initialize
+;; 避免 Debian Emacs 30.1 的 url-vars 字节码缺陷导致启动报错
+(setq package-enable-at-startup nil)
+
 ;; ── Debug 开关 ──
-;; 配置/调试阶段设为 t，报错窗口、警告、backtrace 全开
-;; 稳定后可设为 nil 或直接删掉这行
+;; t    = 开发/调试模式：错误回溯全开，启动加速关闭
+;; nil  = 正常模式：静默启动，加速项启用
 (setq my/debug-mode t)
 
 ;; ── 启动加速（仅稳定后生效） ──
@@ -29,24 +34,3 @@
   (setq debug-on-error t
         debug-on-signal t
         warning-minimum-level :debug))
-
-;; ============================================================
-;; early-init.el — Emacs 29+ 早期初始化（界面加速）
-;; 在 GUI 框架和包系统加载前执行
-;; ============================================================
-
-;; 关闭工具栏、滚动条、菜单栏（GUI 模式）
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-
-;; 关闭启动画面
-(setq inhibit-startup-screen t)
-
-;; 关闭文件开头的声音提示
-(setq ring-bell-function 'ignore)
-
-;; 关闭 GC 警告（减少卡顿）
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6)
-
