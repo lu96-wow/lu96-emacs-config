@@ -1,17 +1,31 @@
 ;; ============================================================
-;; 12-rainbow-delimiters.el — 彩色括号（通用，所有编程模式）
+;; 12-rainbow-delimiters.el — 彩色括号（通用，所有文件）
 ;; ============================================================
 ;;
 ;; 安装：M-x package-install RET rainbow-delimiters RET
 ;; 新机器首次启动自动通过 :ensure t 安装
 ;;
-;; 效果：括号按嵌套深度 9 色循环着色，光标高亮匹配括号
+;; 效果：
+;;   所有文件（包括无后缀等任意文件）括号按嵌套深度 9 色循环着色
+;;
+;; 排除列表：
+;;   如有不需要彩色括号的 mode，加到这个列表里：
+;;     (push 'dired-mode my/rainbow-exclude-modes)
 ;; ============================================================
 
+;; ── 排除列表（不想生效的 major mode 加在这里） ──
+(defvar my/rainbow-exclude-modes
+  '(dired-mode
+    help-mode
+    special-mode
+    ibuffer-mode
+    compilation-mode)
+  "不启用彩色括号的 major mode 列表。")
+
+;; ── rainbow-delimiters ──
 (use-package rainbow-delimiters
   :ensure t
   :defer t
-  :hook ((prog-mode text-mode) . rainbow-delimiters-mode)
   :init
   ;; 确保语法高亮在所有模式下开启（彩色括号依赖 font-lock）
   (global-font-lock-mode 1)
@@ -35,6 +49,14 @@
     (set-face-foreground
      (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
      (nth i my/rainbow-colors))))
+
+;; ── 全局激活：所有 major mode 变更后自动启用，排除列表除外 ──
+(defun my/rainbow-delimiters-activate ()
+  "在非排除列表的 mode 中启用彩色括号。"
+  (unless (memq major-mode my/rainbow-exclude-modes)
+    (rainbow-delimiters-mode 1)))
+
+(add-hook 'after-change-major-mode-hook #'my/rainbow-delimiters-activate)
 
 (provide '12-rainbow-delimiters)
 ;;; 12-rainbow-delimiters.el ends here
