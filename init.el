@@ -16,6 +16,7 @@
 (require '00-packages)        ;; 包管理
 (require '05-ui)              ;; 界面设置
 (require '10-editor)          ;; 编辑器行为
+(require '11-bracket)         ;; 括号自动补全（通用）
 (require '12-rainbow-delimiters)  ;; 彩色括号（通用）
 ;; (require '15-completion)   ;; 补全框架（需要时取消注释并安装 company）
 (require '20-lang-racket)     ;; Racket
