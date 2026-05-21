@@ -18,6 +18,7 @@
 (require '10-editor)          ;; 编辑器行为
 (require '11-bracket)         ;; 括号自动补全（通用）
 (require '12-rainbow-delimiters)  ;; 彩色括号（通用）
+(require '13-rainbow-identifiers)  ;; 标识符彩色着色（通用）
 ;; (require '15-completion)   ;; 补全框架（需要时取消注释并安装 company）
 (require '20-lang-racket)     ;; Racket
 (require '21-lang-cc)         ;; C/C++
