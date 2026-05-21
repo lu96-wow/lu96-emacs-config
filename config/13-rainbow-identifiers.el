@@ -29,27 +29,29 @@
   (setq rainbow-identifiers-face-count 15)
   (setq rainbow-identifiers-choose-face-function
         'rainbow-identifiers-predefined-choose-face)
-  ;; 自定义 15 色 foreground，保证相邻索引颜色差异大
-  (let ((colors
-         '("#e6194b"  ;; 1.  红
-           "#3cb44b"  ;; 2.  绿
-           "#4363d8"  ;; 3.  蓝
-           "#f58231"  ;; 4.  橙
-           "#911eb4"  ;; 5.  紫
-           "#42d4f4"  ;; 6.  青
-           "#f032e6"  ;; 7.  粉
-           "#bfef45"  ;; 8.  黄绿
-           "#469990"  ;; 9.  墨绿
-           "#dcbeff"  ;; 10. 淡紫
-           "#9a6324"  ;; 11. 棕
-           "#800000"  ;; 12. 深红
-           "#aaffc3"  ;; 13. 浅绿
-           "#808000"  ;; 14. 橄榄
-           "#000075"))) ;; 15. 深蓝
-    (dotimes (i (length colors))
+  ;; 基于 VS Code Dark+ (Codium 默认) 配色调色板
+  ;; 色彩柔和，不刺眼不暗淡
+  (progn
+    (setq my/rainbow-ids-colors
+          '("#9CDCFE"  ;; 1.  浅蓝（变量）
+            "#DCDCAA"  ;; 2.  米黄（函数）
+            "#4EC9B0"  ;; 3.  青绿（类型）
+            "#C586C0"  ;; 4.  淡紫（关键字）
+            "#CE9178"  ;; 5.  橙褐（字符串）
+            "#569CD6"  ;; 6.  蓝（常量）
+            "#b5cea8"  ;; 7.  草绿（数字）
+            "#d7ba7d"  ;; 8.  暖黄（转义）
+            "#d16969"  ;; 9.  暗红（正则）
+            "#4FC1FF"  ;; 10. 亮蓝（枚举）
+            "#C8C8C8"  ;; 11. 浅灰（标签）
+            "#6A9955"  ;; 12. 灰绿（注释）
+            "#c8a070"  ;; 13. 驼色
+            "#a888c8"  ;; 14. 灰紫
+            "#70b8a8")) ;; 15. 苍青
+    (dotimes (i (length my/rainbow-ids-colors))
       (set-face-foreground
        (intern (format "rainbow-identifiers-identifier-%d" (1+ i)))
-       (nth i colors)))))
+       (nth i my/rainbow-ids-colors)))))
 
 ;; ── 全局激活 ──
 (defun my/rainbow-identifiers-activate ()
