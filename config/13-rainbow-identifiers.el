@@ -20,15 +20,19 @@
 (use-package rainbow-identifiers
   :ensure t
   :defer t
+  :init
+  ;; 输入后延迟着色，避免打字时单词颜色不停跳变
+  ;; 0.3 秒 = 停顿时才刷新颜色
+  (setq jit-lock-defer-time 0.3)
   :config
-  ;; 颜色数量（默认 26 种色调循环）
-  (setq rainbow-identifiers-face-count 12)
-  ;; 选择颜色生成方式：CIE Lab 空间，色彩更均匀
+  ;; 颜色数量（更多色彩，更亮）
+  (setq rainbow-identifiers-face-count 16)
+  ;; CIE Lab 空间生成颜色，色彩均匀分布
   (setq rainbow-identifiers-choose-face-function
         'rainbow-identifiers-cie-l*a*b*-choose-face
-        rainbow-identifiers-cie-l*a*b*-lightness 55
-        rainbow-identifiers-cie-l*a*b*-saturation 45
-        rainbow-identifiers-cie-l*a*b*-color-count 12))
+        rainbow-identifiers-cie-l*a*b*-lightness 65   ;; 亮度提高
+        rainbow-identifiers-cie-l*a*b*-saturation 55  ;; 饱和度提高
+        rainbow-identifiers-cie-l*a*b*-color-count 16))
 
 ;; ── 全局激活 ──
 (defun my/rainbow-identifiers-activate ()
