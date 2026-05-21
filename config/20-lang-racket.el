@@ -58,13 +58,14 @@
     (company-mode 1)
     ;; ── eldoc 参数/文档提示 ──
     (eldoc-mode 1)
+    ;; ── 括号匹配补全（内置，无需装包） ──
+    (electric-pair-mode 1)
+    ;; ── 彩色括号（按嵌套深度着色） ──
+    (rainbow-delimiters-mode 1)
     ;; ── 可选辅助（装了才启用） ──
     ;; paredit / smartparens：结构化括号编辑
     (when (fboundp 'paredit-mode)
       (paredit-mode 1))
-    ;; rainbow-delimiters：彩虹括号（按嵌套深度着色）
-    (when (fboundp 'rainbow-delimiters-mode)
-      (rainbow-delimiters-mode 1))
     ;; quack：Racket 专属缩进与文档集成
     (when (fboundp 'quack-mode)
       (quack-mode 1))
@@ -72,6 +73,11 @@
     (setq-local indent-tabs-mode nil
                 tab-width 2))
   (setq racket-program "racket"))
+
+;; ── rainbow-delimiters 彩色括号 ──
+(use-package rainbow-delimiters
+  :ensure t
+  :defer t)
 
 ;; ── company 补全框架配置 ──
 (use-package company
