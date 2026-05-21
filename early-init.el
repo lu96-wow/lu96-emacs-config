@@ -29,8 +29,6 @@
   (setq gc-cons-threshold most-positive-fixnum
         gc-cons-percentage 0.6))
 
-;; Debug 模式下：打开错误回溯、警告完整显示
-(when my/debug-mode
-  (setq debug-on-error t
-        debug-on-signal t
-        warning-minimum-level :debug))
+;; 注：debug-on-error 不放在这里，因为 Debian 的 site-start.d
+;; 系统文件有字节码缺陷，debug-on-error 会让它们崩掉。
+;; debug-on-error 改放到 init.el 开头（Debian 系统文件加载完后）。

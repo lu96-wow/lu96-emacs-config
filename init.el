@@ -3,6 +3,12 @@
 ;; 模块化加载各文件，按语言分类
 ;; ============================================================
 
+;; 此时 Debian 系统 site-start.d 已加载完毕，可以安全开启 debug
+(let ((debug-mode (bound-and-true-p my/debug-mode)))
+  (when debug-mode
+    (setq debug-on-error t
+          warning-minimum-level :debug)))
+
 ;; 将 config/ 目录加入加载路径
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
 
