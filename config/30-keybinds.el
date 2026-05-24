@@ -13,7 +13,7 @@
 (global-set-key (kbd "C-S-c") 'kill-ring-save)              ;; C-S-c = 复制（终端备用）
 
 ;; ── DiredSidebar 侧边栏 ──
-(global-set-key (kbd "C-x C-n") 'dired-sidebar-toggle-sidebar)  ;; C-x C-n = 切换侧边栏
+(global-set-key (kbd "C-.") 'dired-sidebar-toggle-sidebar)  ;; C-x C-n = 切换侧边栏
 
 (provide '30-keybinds)
 ;;; 30-keybinds.el ends here
