@@ -8,7 +8,7 @@
   :commands (dired-sidebar-toggle-sidebar)
   :config
   ;; ── 外观设置 ──
-  (setq dired-sidebar-theme 'nerb)              ;; 简洁风格（nil=默认, 'nerb=简洁）
+  (setq dired-sidebar-theme 'nerd)               ;; Nerd 风格（nil=默认, 'nerd=简洁Nerd风格, 'ascii=纯文本+/-风格）
   (setq dired-sidebar-width 28)                  ;; 侧边栏宽度（字符数）
   (setq dired-sidebar-no-delete-char t)          ;; 禁止在侧边栏按 d 标记删除
   (setq dired-sidebar-no-subdir-control t)       ;; 不显示子目录控制按钮

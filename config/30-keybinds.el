@@ -12,6 +12,10 @@
 (global-set-key (kbd "C-i") 'set-mark-command)              ;; C-i = 开始选中
 (global-set-key (kbd "C-S-c") 'kill-ring-save)              ;; C-S-c = 复制（终端备用）
 
+;; ── 搜索快捷键 ──
+(global-set-key (kbd "C-c [") 'isearch-backward)            ;; C-c < = 向前查找
+(global-set-key (kbd "C-c ]") 'isearch-forward)             ;; C-c > = 向后查找
+
 ;; ── DiredSidebar 侧边栏 ──
 (global-set-key (kbd "C-c .") 'dired-sidebar-toggle-sidebar)  ;; C-c . = 切换侧边栏（终端友好）
 
