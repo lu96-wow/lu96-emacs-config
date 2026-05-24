@@ -26,12 +26,14 @@
   (setq dired-sidebar-mouse-button-action 'find-file)  ;; 鼠标点击打开文件
 
   ;; ── 关闭侧边栏后回到原窗口 ──
+  ;;     修复：原窗口被关闭时不再尝试切回，避免 "Attempt to select deleted window"
   (advice-add 'dired-sidebar-toggle-sidebar :around
               (lambda (orig-fun &rest args)
                 (let ((cur-win (selected-window)))
                   (apply orig-fun args)
-                  ;; 如果侧边栏关闭了，回到之前选中的窗口
-                  (unless (eq (selected-window) cur-win)
+                  ;; 仅当 cur-win 仍然存活 且 焦点切到了侧边栏时才切回去
+                  (when (and (window-live-p cur-win)
+                             (not (eq (selected-window) cur-win)))
                     (select-window cur-win)))))
 
   ;; ── 打开文件时自动刷新侧边栏 ──
