@@ -37,7 +37,8 @@
                     (select-window cur-win)))))
 
   ;; ── 打开文件时自动刷新侧边栏 ──
-  (add-hook 'find-file-hook 'dired-sidebar-follow-file))
+  (add-hook 'find-file-hook 'dired-sidebar-follow-file)
+)
 
 (provide '06-dired-sidebar)
 ;;; 06-dired-sidebar.el ends here
