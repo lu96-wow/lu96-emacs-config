@@ -23,5 +23,25 @@
 (global-set-key (kbd "C-c w <down>")  'windmove-down)   ;; C-c w ↓  = 移到下方窗口
 (global-set-key (kbd "C-c w d")       'delete-window)   ;; C-c w d  = 删除当前窗口
 
+;; ── Buffer 操作前缀键（C-c b）──
+;; C-c b 现为前缀键，所有 buffer 操作均在其下
+(defvar my-buffer-map (make-sparse-keymap)
+  "Keymap for buffer operations under C-c b.")
+
+(define-key my-buffer-map (kbd "l") 'ibuffer)                ;; C-c b l = 列出所有 Buffer（ibuffer）
+(define-key my-buffer-map (kbd "u") 'previous-buffer)        ;; C-c b u = 切换到上一个 buffer（↑）
+(define-key my-buffer-map (kbd "p") 'previous-buffer)        ;; C-c b p = 切换到上一个 buffer（Prev）
+(define-key my-buffer-map (kbd "d") 'next-buffer)            ;; C-c b d = 切换到下一个 buffer（↓）
+(define-key my-buffer-map (kbd "n") 'next-buffer)            ;; C-c b n = 切换到下一个 buffer（Next）
+(define-key my-buffer-map (kbd "k") 'kill-buffer)            ;; C-c b k = 删除当前 buffer（Kill）
+(define-key my-buffer-map (kbd "b") 'switch-to-buffer)       ;; C-c b b = 交互式切换 buffer
+
+(global-set-key (kbd "C-c b") my-buffer-map)                 ;; C-c b 前缀键
+
+;; ── 文件 / 窗口操作（C-c 前缀快捷）──
+(global-set-key (kbd "C-c f") 'find-file)                    ;; C-c f = 打开文件
+(global-set-key (kbd "C-c -") 'split-window-below)           ;; C-c - = 垂直创建新窗口（左右分） 
+(global-set-key (kbd "C-c \\") 'split-window-right)          ;; C-c \ = 水平分隔创建新窗口（上下分）
+
 (provide '30-keybinds)
 ;;; 30-keybinds.el ends here
