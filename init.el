@@ -15,6 +15,7 @@
 ;; ── 加载顺序（数字前缀控制优先级） ──
 (require '00-packages)        ;; 包管理
 (require '05-ui)              ;; 界面设置
+(require '06-dired-sidebar)   ;; 侧边栏文件管理器
 (require '10-editor)          ;; 编辑器行为
 (require '11-bracket)         ;; 括号自动补全（通用）
 (require '12-rainbow-delimiters)  ;; 彩色括号（通用）
