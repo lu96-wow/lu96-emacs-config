@@ -2,6 +2,15 @@
 ;; 05-ui.el — 界面设置
 ;; ============================================================
 
+;; 关闭顶部菜单栏（File Edit Options Buffers Tools Help）
+(menu-bar-mode -1)
+
+;; 关闭工具栏（图标按钮）
+(tool-bar-mode -1)
+
+;; 关闭滚动条
+(scroll-bar-mode -1)
+
 ;; 行号（全局开启）
 (global-display-line-numbers-mode 1)
 ;; 不要行号在终端下显示为红色（避免混乱）
