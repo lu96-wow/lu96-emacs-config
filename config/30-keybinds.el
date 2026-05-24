@@ -21,7 +21,16 @@
 (global-set-key (kbd "C-c w <right>") 'windmove-right)  ;; C-c w →  = 移到右边窗口
 (global-set-key (kbd "C-c w <up>")    'windmove-up)     ;; C-c w ↑  = 移到上方窗口
 (global-set-key (kbd "C-c w <down>")  'windmove-down)   ;; C-c w ↓  = 移到下方窗口
-(global-set-key (kbd "C-c w d")       'delete-window)   ;; C-c w d  = 删除当前窗口
+(global-set-key (kbd "C-c w d")       'my/delete-window)  ;; C-c w d  = 安全删除当前窗口
+
+;; ── 安全删除窗口（避免最后一个窗口报错）──
+(defun my/delete-window ()
+  "安全地删除当前窗口。
+如果当前是最后一个窗口，则不会删除，仅显示提示信息。"
+  (interactive)
+  (if (one-window-p)
+      (message "已是最后一个窗口，无法删除")
+    (delete-window)))
 
 ;; ── Buffer 操作前缀键（C-c b）──
 ;; C-c b 现为前缀键，所有 buffer 操作均在其下
