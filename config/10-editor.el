@@ -4,7 +4,7 @@
 
 ;; ── 基础编辑 ──
 (setq-default indent-tabs-mode nil)       ;; 使用空格缩进
-(setq-default tab-width 4)                ;; 缩进宽度 4
+(setq-default tab-width 2)                ;; 缩进宽度 4
 (setq-default fill-column 80)             ;; 自动换行列宽
 
 ;; 选中文本后输入直接替换
