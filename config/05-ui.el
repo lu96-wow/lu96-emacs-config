@@ -1,15 +1,11 @@
 ;; ============================================================
-;; 05-ui.el — 界面设置
+;; 05-ui.el — 界面设置（兼容终端与 GUI）
 ;; ============================================================
 
-;; 关闭顶部菜单栏（File Edit Options Buffers Tools Help）
-(menu-bar-mode -1)
-
-;; 关闭工具栏（图标按钮）
-(tool-bar-mode -1)
-
-;; 关闭滚动条
-(scroll-bar-mode -1)
+;; 安全关闭 GUI 元素（在终端中这些函数不存在）
+(when (fboundp 'menu-bar-mode)   (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode)   (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; 行号（全局开启）
 (global-display-line-numbers-mode 1)
