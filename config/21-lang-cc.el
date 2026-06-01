@@ -5,10 +5,10 @@
 
 (use-package cc-mode
   :defer t
-  :mode ("\\.c\\'"   "\\.h\\'"
-         "\\.cpp\\'" "\\.hpp\\'"
-         "\\.cc\\'"  "\\.cxx\\'"
-         "\\.hh\\'"  "\\.hxx\\'")
+  ;; Emacs 30+ auto-mode-alist 已内置 .c/.h/.cpp/.cc 等规则，
+  ;; 且 c-mode/c++-mode 已通过 ;;;###autoload 从 cc-mode.el 自动加载，
+  ;; 无需 :mode 重复添加（否则 use-package 创建映射到 cc-mode 符号的条目，
+  ;; 但 cc-mode 是库名而非函数名，导致 autoload 报错）。
   :hook ((c-mode . my/c-mode-setup)
          (c++-mode . my/c++-mode-setup))
   :config
