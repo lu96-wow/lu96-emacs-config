@@ -44,6 +44,11 @@
        "  q                关闭\n"
        "  H                切换 dotfiles 显隐\n"
        "  A                最大化\n\n"
+       "工作区（C-c t）\n"
+       "  C-c t ← / →     上一个 / 下一个\n"
+       "  C-c t n          新建\n"
+       "  C-c t d          关闭\n"
+       "  C-c t r          重命名\n\n"
        "CUA（选中后）\n"
        "  C-c              复制\n"
        "  C-x              剪切\n"
@@ -82,6 +87,16 @@
 (global-set-key (kbd "C-c w <up>")    'windmove-up)
 (global-set-key (kbd "C-c w <down>")  'windmove-down)
 (global-set-key (kbd "C-c w d")       'my/delete-window)
+
+;; ── 工作区导航（C-c t 前缀）──
+(defvar my-tab-map (make-sparse-keymap)
+  "Keymap for tab/workspace operations under C-c t.")
+(define-key my-tab-map (kbd "<left>")  'tab-previous)
+(define-key my-tab-map (kbd "<right>") 'tab-next)
+(define-key my-tab-map (kbd "n")       'tab-new)
+(define-key my-tab-map (kbd "d")       'tab-close)
+(define-key my-tab-map (kbd "r")       'tab-rename)
+(global-set-key (kbd "C-c t") my-tab-map)
 
 ;; ── 安全删除窗口 ──
 (defun my/delete-window ()

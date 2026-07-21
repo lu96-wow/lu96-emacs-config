@@ -47,5 +47,16 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 20)
 
+;; ── 工作区（内置 tab-bar-mode）──
+;; C-x t 2   — 新建工作区
+;; C-x t 0   — 关闭当前工作区
+;; C-x t o   — 切换到下一个工作区
+;; C-x t RET — 切换到上一个工作区（或直接鼠标点击标签）
+;; C-x t r   — 重命名当前工作区
+(global-tab-line-mode -1)             ;; 关闭 buffer 标签行（只用工作区标签）
+(tab-bar-mode 1)                      ;; 启用工作区标签
+(tab-bar-history-mode 1)              ;; 记住标签切换历史
+(setq tab-bar-close-button-show nil)   ;; 隐藏关闭按钮，更干净
+
 (provide '05-ui)
 ;;; 05-ui.el ends here
