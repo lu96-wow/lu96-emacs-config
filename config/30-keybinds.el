@@ -48,8 +48,7 @@
     (special-mode)
     (setq buffer-read-only t
           mode-line-format nil)
-    (pop-to-buffer (current-buffer))
-    (set-window-text-height (selected-window) 24)))
+    (pop-to-buffer (current-buffer))))
 
 ;; C-c h 显示帮助
 (global-set-key (kbd "C-c h") 'my/display-keybindings-help)
