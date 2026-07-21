@@ -49,7 +49,7 @@
     (unless (slime-current-connection)
       (condition-case nil
           (slime)
-        (error nil)))))
+        (error (message "SLIME 启动失败，检查 sbcl 是否安装"))))))
 
 ;; ── SLIME 专用 company 后端 ──
 (use-package slime-company

@@ -18,12 +18,14 @@
 
 ;; ── 清理：只保留最近 30 个 ──
 (defun my/desktop-cleanup ()
-  (let* ((files (directory-files desktop-dirname t "\\.desktop\\'" t))
-         (sorted (sort files (lambda (a b)
-                               (> (float-time (nth 5 (file-attributes a)))
-                                  (float-time (nth 5 (file-attributes b))))))))
+  (let* ((files (ignore-errors
+                  (directory-files desktop-dirname t "\\.desktop\\'" t)))
+         (sorted (and files
+                      (sort files (lambda (a b)
+                                    (> (float-time (or (nth 5 (file-attributes a)) 0))
+                                       (float-time (or (nth 5 (file-attributes b)) 0))))))))
     (dolist (f (nthcdr 30 sorted))
-      (delete-file f))))
+      (ignore-errors (delete-file f)))))
 
 (add-hook 'desktop-save-hook #'my/desktop-cleanup)
 

@@ -33,8 +33,8 @@
 
 ;; ── 编码检测 ──
 (setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
+(ignore-errors (set-terminal-coding-system 'utf-8))
+(ignore-errors (set-keyboard-coding-system 'utf-8))
 
 (provide '10-editor)
 ;;; 10-editor.el ends here

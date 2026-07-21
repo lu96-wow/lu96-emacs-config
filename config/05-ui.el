@@ -14,11 +14,13 @@
 
 ;; ── 颜色主题（暗色） ──
 ;; modus-vivendi 是 Emacs 官方暗色主题，高对比度、护眼
-(load-theme 'modus-vivendi t)
+(condition-case nil
+    (load-theme 'modus-vivendi t)
+  (error (message "主题加载失败，使用默认主题")))
 
 ;; 高亮当前行（淡灰色）
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#333333")
+(ignore-errors (set-face-background 'hl-line "#333333"))
 
 ;; 显示列号
 (column-number-mode 1)

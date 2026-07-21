@@ -19,7 +19,9 @@
 
 ;; 首次使用自动刷新包列表
 (unless package-archive-contents
-  (package-refresh-contents))
+  (condition-case nil
+      (package-refresh-contents)
+    (error (message "无法连接 ELPA 源，跳过包列表刷新"))))
 
 ;; ── use-package 集成（Emacs 29+ 内置） ──
 (require 'use-package)
