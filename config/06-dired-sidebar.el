@@ -8,6 +8,11 @@
 ;;   g / q         — 刷新 / 关闭
 ;;   H             — 切换 dotfiles 显隐
 ;;   A             — 最大化/还原宽度
+;;   C-c C-n       — 创建文件或目录
+;;   C-c C-d       — 删除文件或目录
+;;   C-c C-r       — 重命名
+;;   C-c C-c       — 将当前目录设为根
+;;   U             — 回上级目录
 
 (use-package neotree
   :ensure t
