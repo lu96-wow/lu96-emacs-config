@@ -24,6 +24,10 @@
 ;; ── 搜索 ──
 (setq lazy-highlight-initial-delay 0)     ;; 即时高亮搜索结果
 
+;; ── 语法着色性能 ──
+(setq fast-but-imprecise-scrolling t)     ;; 快速滚动时跳过着色，停下再补（Emacs 29+）
+(setq jit-lock-defer-time 0.05)           ;; 滚动停止 0.05 秒后再着色，减少卡顿
+
 ;; ── 记住光标位置 ──
 (save-place-mode 1)
 
