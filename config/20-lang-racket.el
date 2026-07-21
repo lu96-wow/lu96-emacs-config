@@ -67,7 +67,8 @@
       (quack-mode 1))
     ;; Racket 缩进：2 空格
     (setq-local indent-tabs-mode nil
-                tab-width 2))
+                tab-width 2
+                racket-indent-offset 2))
   (setq racket-program "racket"))
 
 ;; ── company 补全框架配置 ──

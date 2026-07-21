@@ -26,6 +26,11 @@
 ;; 显示时间（可选）
 (display-time-mode 1)
 
+;; ── 终端鼠标支持 ──
+;; 在 emacs -nw 下启用鼠标点击切换窗口、调整窗口大小等
+(unless (display-graphic-p)
+  (xterm-mouse-mode 1))
+
 ;; 匹配括号高亮
 (show-paren-mode 1)
 (setq show-paren-delay 0

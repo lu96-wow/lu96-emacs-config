@@ -24,6 +24,7 @@
 ;; (require '15-completion)   ;; 补全框架（需要时取消注释并安装 company）
 (require '20-lang-racket)     ;; Racket
 (require '21-lang-cc)         ;; C/C++
+(require '22-lang-lisp)       ;; Common Lisp (SLIME)
 (require '30-keybinds)        ;; 快捷键
 
 ;; 自定义设置存储文件

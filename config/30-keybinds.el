@@ -2,6 +2,58 @@
 ;; 30-keybinds.el — 快捷键配置
 ;; ============================================================
 
+;; ── 自定义键位帮助 ──
+(defun my/display-keybindings-help ()
+  "显示自定义快捷键帮助缓冲区。"
+  (interactive)
+  (with-current-buffer (get-buffer-create "*键位帮助*")
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (insert
+       "╔══════════════════════════════════════════════════════════╗\n"
+       "║               自定义快捷键帮助                         ║\n"
+       "╚══════════════════════════════════════════════════════════╝\n\n"
+       "  ── 基本操作 ──\n"
+       "  C-q              退出 Emacs\n"
+       "  C-i              开始选中（标记起点）\n"
+       "  C-S-c            复制（终端备用）\n\n"
+       "  ── 文件与窗口 ──\n"
+       "  C-c f            打开文件\n"
+       "  C-c -            上下分割窗口\n"
+       "  C-c \\            左右分割窗口\n\n"
+       "  ── 窗口导航 ──\n"
+       "  C-c w ←          移到左边窗口\n"
+       "  C-c w →          移到右边窗口\n"
+       "  C-c w ↑          移到上方窗口\n"
+       "  C-c w ↓          移到下方窗口\n"
+       "  C-c w d          删除当前窗口\n\n"
+       "  ── Buffer 操作（C-c b 前缀）──\n"
+       "  C-c b l          列出所有 Buffer（ibuffer）\n"
+       "  C-c b n / p      切换到下/上一个 Buffer\n"
+       "  C-c b d / u      切换到下/上一个 Buffer（备用）\n"
+       "  C-c b k          删除当前 Buffer\n"
+       "  C-c b b          交互式切换 Buffer\n\n"
+       "  ── 搜索 ──\n"
+       "  C-c [            向前搜索\n"
+       "  C-c ]            向后搜索\n\n"
+       "  ── 侧边栏 ──\n"
+       "  C-c .            切换文件侧边栏\n\n"
+       "  ── CUA（选中后可用）──\n"
+       "  C-c              复制\n"
+       "  C-x              剪切\n"
+       "  C-v              粘贴\n"
+       "  C-z              撤销\n\n"
+       "  按 q 或再按 C-c h 关闭此窗口\n")
+      (goto-char (point-min)))
+    (special-mode)
+    (setq buffer-read-only t
+          mode-line-format nil)
+    (pop-to-buffer (current-buffer))
+    (set-window-text-height (selected-window) 24)))
+
+;; C-c h 显示帮助
+(global-set-key (kbd "C-c h") 'my/display-keybindings-help)
+
 ;; ── CUA 模式 ──
 ;; 有选中区域时：C-c = 复制, C-x = 剪切, C-v = 粘贴
 ;; 无选中区域时：C-c 仍可作为模式前缀键使用
