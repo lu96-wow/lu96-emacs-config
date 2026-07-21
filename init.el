@@ -17,6 +17,7 @@
 (require '05-ui)              ;; 界面设置
 (require '06-dired-sidebar)   ;; 侧边栏文件管理器
 (require '07-key-hook)
+(require '09-desktop)         ;; 布局保存/恢复
 (require '10-editor)          ;; 编辑器行为
 (require '11-bracket)         ;; 括号自动补全（通用）
 (require '12-rainbow-delimiters)  ;; 彩色括号（通用）
